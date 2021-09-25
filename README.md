@@ -34,6 +34,7 @@ In this project, you will build the reducer, actions and basic redux connects ne
       - a boolean indicating if the app is loading
       - a string indicating a possible error message
 
+
   * [ ] Add in the arguments needed to complete a standard reducer function.
   * [ ] Add in a reducer case to accommodate the start of a smurf fetch.
   * [ ] Add in a reducer case to accommodate the successful smurf api fetch.

@@ -45,9 +45,9 @@ describe("Basic Application Functioning:", ()=>{
     });
     
     test('App loads initial data and displays them correctly', async ()=> {
-        reduxRender(<App/>, initialState);
+        reduxRender(<App/>, initialState)
         const smurfs = await screen.findAllByTestId("smurf");
-        expect(smurfs).toHaveLength(2);
+        expect(smurfs).toHaveLength(3);
     });
 });
 

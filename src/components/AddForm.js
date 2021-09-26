@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
+ import {connect} from 'react-redux';
+ import {addSmurfs, errorMessage } from '../actions';
 
-const AddForm = (props) => {
-    const [state, setState] = useState({
-        name:"",
-        position:"",
+
+
+ const AddForm = (props) => {
+
+     const [state, setState] = useState({
+         name:"",
+         position:"",
         nickname:"",
         description:""
     });
-
-    //remove when error state is added
-    const errorMessage = "";
-
     const handleChange = e => {
         setState({
             ...state,
@@ -18,15 +19,23 @@ const AddForm = (props) => {
         });
     }
 
-    const handleSubmit = e => {
-        e.preventDefault();
-        if (state.name === "" || state.position === "" || state.nickname === "") {
-            //add in error action
-        }
-    }
+      
+    const errorMessage = state.errorMessage; 
 
-    return(<section>
-        <h2>Add Smurf</h2>
+     const handleSubmit = e => {
+         e.preventDefault();
+         if (state.name === "" || state.position === "" || state.nickname === "") {
+             props.errorMessage("Please enter: name, position and nickname fields.");
+             props.errorMessage("Please enter: name, position and nickname fields.");
+         }else{
+             props.addSmurfs(state)
+         }
+     }
+
+   
+
+     return(<section>
+         <h2>Add Smurf</h2>
         <form onSubmit={handleSubmit}>
             <div className="form-group">
                 <label htmlFor="name">Name:</label><br/>
@@ -44,16 +53,17 @@ const AddForm = (props) => {
                 <label htmlFor="description">Description:</label><br/>
                 <textarea onChange={handleChange} value={state.description} name="description" id="description" />
             </div>
-            {
-                errorMessage && <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {errorMessage}</div>
-            }
-            <button>Submit Smurf</button>
-        </form>
-    </section>);
-}
+             {
+                 errorMessage && <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {errorMessage}</div>
+             }
+             
+             <button onClick={handleSubmit}>submit smurf</button>
+         </form>
+     </section>);
+ }
 
-export default AddForm;
 
+ export default connect(null,{addSmurfs,errorMessage})(AddForm);
 //Task List:
 //1. Connect the errorMessage, setError and addSmurf actions to the AddForm component.
 //2. Replace all instances of the errorMessage static variable with your error message state value. 

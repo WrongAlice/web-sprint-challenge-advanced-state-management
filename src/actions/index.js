@@ -18,9 +18,11 @@ import axios from 'axios';
         
          .then(res =>{
              dispatch(fetchSuccess(res.data));
+             console.log("a-looky huuuur:", res)
          })
          .catch(err =>{
-             dispatch(fetchFail("No Smurfs today, sorry."))
+             dispatch(fetchFail("Ehhh No Smurfs today, sorry."))
+             console.log("a-looky huuuur:", err)
          })
      }
  }
@@ -28,7 +30,7 @@ import axios from 'axios';
  export const fetchStart = () =>{
      return({type:FETCH_START})
  }
-
+ 
  export const fetchSuccess = (smurfs) =>{
      return({type:FETCH_SUCCESS, payload:smurfs})
  }
